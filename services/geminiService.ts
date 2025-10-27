@@ -1,8 +1,8 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Product } from '../types';
 
-// FIX: Per coding guidelines, the API key must be obtained from process.env.API_KEY.
-// The execution environment is assumed to have this variable configured and available.
+// FIX: Initialize GoogleGenAI with API key from process.env as per guidelines,
+// which also resolves the TypeScript error regarding 'import.meta.env'.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const fetchProducts = async (): Promise<Product[]> => {
