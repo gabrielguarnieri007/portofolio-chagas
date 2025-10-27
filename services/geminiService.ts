@@ -1,14 +1,16 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Product } from '../types';
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+// FIX: Per coding guidelines, the API key must be obtained from process.env.API_KEY.
+// The execution environment is assumed to have this variable configured and available.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const fetchProducts = async (): Promise<Product[]> => {
   try {
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
       // Ask for 7 products, as we will prepend one manually
-      contents: "Gere uma lista de 7 produtos fictícios para o portfólio da Chagas Representações. Os produtos devem ser das categorias: pisos, porcelanatos, azulejos, isopor e formas para construção. Para cada produto, forneça um ID único, nome, uma descrição curta e atraente (1-2 frases), um preço realista (entre 30 e 500), uma unidade (como 'por m²', 'por peça', 'por painel'), e uma palavra-chave de imagem em INGLÊS de uma só palavra (ex: 'tile', 'flooring', 'styrofoam', 'concrete-form', 'porcelain'). Garanta que o ID seja uma string única.",
+      contents: "Gere uma lista de 7 produtos fictícios para o portfólo da Chagas Representações. Os produtos devem ser das categorias: pisos, porcelanatos, azulejos, isopor e formas para construção. Para cada produto, forneça um ID único, nome, uma descrição curta e atraente (1-2 frases), um preço realista (entre 30 e 500), uma unidade (como 'por m²', 'por peça', 'por painel'), e uma palavra-chave de imagem em INGLÊS de uma só palavra (ex: 'tile', 'flooring', 'styrofoam', 'concrete-form', 'porcelain'). Garanta que o ID seja uma string única.",
       config: {
         responseMimeType: "application/json",
         responseSchema: {
